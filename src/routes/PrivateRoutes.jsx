@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 /* components */
-// import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 
 const PrivateRoutes = ({
   component: component,
@@ -11,7 +11,7 @@ const PrivateRoutes = ({
   const _isLoggedIn = true;
   return _isLoggedIn ? (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <section className="page">
         <Outlet />
       </section>
