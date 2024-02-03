@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
 /* layout */
 import Login from "../pages/Login";
-import Dashboard from "../pages/Dasboard";
+import Dashboard from "../pages/Dashboard";
 import ErrorPage from "../pages/ErrorPage";
 
 const MainRoutes = () => {
