@@ -2,38 +2,33 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { setLoginSuccess } from "../store/actions/authAction";
+import { loginUser } from "../store/actions/authAction";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Loading from "../components/shared/Loading";
 
 const Login = (props) => {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     if (name.trim() !== "" && id.trim() !== "") {
-      //   let data = { username, id };
+      try {
+        let data = { name, id };
 
-      //   axios
-      //     .post("http://localhost:3000/login", data)
-      //     .then((res) => {
-      //       console.log(res);
-      //       data.id = res.data.id;
-      //       props.setLoginSuccess(data);
-      //       navigate("/");
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //       if (err.response.status === 500) {
-      //         toast.error("Username or password not found");
-      //       } else {
-      //         toast.error("Login failed");
-      //       }
-      //     });
-      props.setLoginSuccess({});
-      navigate("/");
+        await props.loginUser(data);
+        setLoading(false);
+        toast.success("Logged in successfully");
+        navigate("/");
+      } catch (err) {
+        // console.log(err);
+        toast.error("Invalid ID or Name");
+        setLoading(false);
+      }
     } else {
       toast.error("ID or Name cannot be empty");
     }
@@ -57,7 +52,7 @@ const Login = (props) => {
         </div>
         <div className="form-row">
           <label htmlFor="username" className="form-label">
-            Username
+            Name
           </label>
           <input
             type="text"
@@ -67,8 +62,8 @@ const Login = (props) => {
             value={name}
           />
         </div>
-        <button type="submit" className="btn btn-block">
-          Login
+        <button type="submit" className="btn btn-block" disabled={loading}>
+          {!loading ? "Login" : <Loading />}
         </button>
       </Form>
       {/* <div className="d-flex justify-content-center align-items-center">
@@ -87,7 +82,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setLoginSuccess: (data) => dispatch(setLoginSuccess(data)),
+  loginUser: (data) => dispatch(loginUser(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
