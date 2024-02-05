@@ -1,6 +1,10 @@
 .modal {
+  display: flex !important;
+  place-content: center;
+  width: 100%;
+
   .modal-dialog {
-    width: 300px;
+    max-width: 300px;
 
     .modal-content {
       .modal-header {

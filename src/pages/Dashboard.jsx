@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from "react";
 import debounce from "lodash/debounce";
+import Swal from "sweetalert2";
 // Common
 import WrapperCard from "../components/shared/Cards/WrapperCard";
-import Loading from "../components/shared/Loading";
+// import Loading from "../components/shared/Loading";
 
 // Components
 import NoTaskCard from "../components/Dashboard/NoTaskCard";
 import AddTaskModal from "../components/Dashboard/AddTaskModal";
+import EditTaskModal from "../components/Dashboard/EditTaskModal";
 import TaskCompletedCard from "../components/Dashboard/TaskCompletedCard";
 import LatestCreatedTaskCard from "../components/Dashboard/LatestCreatedTaskCard";
 import CompletedTaskPieChartCard from "../components/Dashboard/CompletedTaskPieChartCard";
 import TaskListCard from "../components/Dashboard/TaskListCard";
+
+const swalCustomConfirmationButtons = Swal.mixin({
+  customClass: {
+    cancelButton: "btn inverse-btn",
+    confirmButton: "btn main-btn mx-3",
+  },
+  buttonsStyling: false,
+});
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([
@@ -19,11 +29,18 @@ const Dashboard = () => {
     { name: "Reinstall windows on PC", completed: true },
     { name: "Start to work on new feature", completed: false },
   ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+  // add task
   const [taskName, setTaskName] = useState("");
-  const [addTaskLoading, setAddTaskLoading] = useState(false);
+  // search task
   const [searchTerm, setSearchTerm] = useState("");
+  // edit task
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [temporaryTaskName, setTemporaryTaskName] = useState("");
+  // flags
+  const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+  const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
 
   const handleUserInput = (e) => {
     const { name, value } = e.target;
@@ -33,6 +50,11 @@ const Dashboard = () => {
       setSearchTerm(value);
       setIsLoading(true);
       debouncedSearch(value);
+    }
+
+    // Update the temporary name when editing
+    if (name === "taskName" && editingIndex !== null) {
+      setTemporaryTaskName(value);
     }
   };
 
@@ -49,13 +71,13 @@ const Dashboard = () => {
 
   const handleAddNewTask = () => {
     console.log("Add this new task ->", taskName);
-    setAddTaskLoading(true);
+    setModalLoading(true);
     setTimeout(() => {
       setTasks((prevTasks) => [
         ...prevTasks,
         { name: taskName, completed: false },
       ]);
-      setAddTaskLoading(false);
+      setModalLoading(false);
       handleShowAddTaskModal();
     }, 1000);
   };
@@ -68,14 +90,57 @@ const Dashboard = () => {
     });
   };
 
+  const handleShowEditTaskModal = (index) => {
+    setShowEditTaskModal((prev) => !prev);
+  };
+
   const handleEditTask = (index) => {
     console.log("Edit ->", index);
-    // logic to edit a task goes here
+    setEditingIndex(index);
+    setTemporaryTaskName(tasks[index].name);
+    handleShowEditTaskModal(index);
+  };
+
+  const handleSubmitEditTask = () => {
+    setModalLoading(true);
+    setTimeout(() => {
+      setTasks((prevTasks) => {
+        const updatedTasks = [...prevTasks];
+        updatedTasks[editingIndex] = {
+          ...updatedTasks[editingIndex],
+          name: temporaryTaskName,
+        };
+        return updatedTasks;
+      });
+      setModalLoading(false);
+      handleShowEditTaskModal();
+      setTemporaryTaskName(""); // Reset the temporary name
+      setEditingIndex(null); // Reset the editing index
+    }, 1000);
   };
 
   const handleDeleteTask = (index) => {
     console.log("Delete ->", index);
-    // logic to delete a task goes here
+    swalCustomConfirmationButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You will not be able to recover it after this!",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "No, keep it",
+        confirmButtonText: "Yes, delete it!",
+        reverseButtons: true,
+        allowOutsideClick: false,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          setTasks((prevTasks) => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks.splice(index, 1);
+            return updatedTasks;
+          });
+        }
+      });
   };
 
   const getFilteredTasks = () => {
@@ -151,7 +216,17 @@ const Dashboard = () => {
           showAddTaskModal={showAddTaskModal}
           handleUserInput={handleUserInput}
           handleAddNewTask={handleAddNewTask}
-          isLoading={addTaskLoading}
+          isLoading={modalLoading}
+        />
+      )}
+      {showEditTaskModal && (
+        <EditTaskModal
+          handleShowEditTaskModal={handleShowEditTaskModal}
+          showEditTaskModal={showEditTaskModal}
+          handleUserInput={handleUserInput}
+          handleSubmitEditTask={handleSubmitEditTask}
+          isLoading={modalLoading}
+          task={temporaryTaskName}
         />
       )}
     </div>
