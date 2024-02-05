@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   img {
-    width: 20vw;
+    width: 40vh;
     max-width: 600px;
     display: block;
     margin-bottom: 2rem;
