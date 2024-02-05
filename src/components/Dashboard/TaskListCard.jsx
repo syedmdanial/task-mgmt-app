@@ -33,7 +33,7 @@ const TaskListCard = ({
           </button>
         </InputGroup>
         <button
-          className="btn main-btn w-50"
+          className="btn main-btn"
           onClick={() => handleShowAddTaskModal()}
         >
           + New Task

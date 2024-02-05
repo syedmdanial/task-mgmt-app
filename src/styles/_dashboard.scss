@@ -35,10 +35,19 @@
   }
 
   .Latest-created-task {
+    .latest-three {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 3em;
+
+      @include lessThan($screen-sm) {
+        margin-left: 1em;
+      }
+    }
     ul {
       list-style: disc;
       text-align: left;
-      margin-left: 76px;
       color: $secondaryText;
     }
   }
@@ -68,13 +77,30 @@
             color: $secondaryText;
           }
         }
+
+        .main-btn {
+          width: 50%;
+        }
+      }
+
+      @include lessThan($screen-sm) {
+        flex-direction: column;
+
+        .title {
+          margin-bottom: 8px;
+        }
+        .controls {
+          flex-direction: column;
+
+          .main-btn {
+            width: 100%;
+            margin-top: 10px;
+          }
+        }
       }
     }
 
     ul {
-      //   list-style-type: none;
-      //   padding: 0;
-
       li {
         display: flex;
         justify-content: space-between;
@@ -104,6 +130,19 @@
             cursor: pointer;
             font-size: 1.5em;
             color: $iconColor;
+          }
+        }
+
+        @include lessThan($screen-sm) {
+          .task-info {
+            span {
+              font-size: clamp(0.75rem, 1.5vw, 1.5rem);
+            }
+          }
+          .task-actions {
+            i {
+              font-size: 1em;
+            }
           }
         }
       }
