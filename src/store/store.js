@@ -1,4 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, Tuple } from "@reduxjs/toolkit";
+import logger from "redux-logger";
+import { thunk } from "redux-thunk";
 import { persistStore, persistReducer, createMigrate } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import rootReducer from "./reducers";
@@ -15,6 +17,7 @@ const pReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: pReducer,
+  middleware: () => new Tuple(thunk, logger),
   // Additional configuration options if needed
 });
 
