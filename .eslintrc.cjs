@@ -21,5 +21,6 @@ module.exports = {
     "react/no-unescaped-entities": "off",
     "react-refresh/only-export-components": "off",
     "no-empty-pattern": "off",
+    "no-undef": "off",
   },
 };

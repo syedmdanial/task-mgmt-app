@@ -1,4 +1,4 @@
-import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalTitle from "react-bootstrap/ModalTitle";
 
 export const TitleOnlyHeader = (props) => (
   <ModalTitle>{props.data.title}</ModalTitle>

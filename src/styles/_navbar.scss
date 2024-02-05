@@ -1,50 +1,74 @@
 .Navbar {
-    background-color: white;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .nav-center {
+    width: var(--view-width);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+
+    .user-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .user-profile-img {
+      img {
+        width: 70px;
+        height: auto;
+        border-radius: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        margin-left: 10px;
+        margin-right: 10px;
+
+        @include lessThan($screen-sm) {
+          width: 36px;
+          height: 36px;
+        }
+      }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-direction: row;
+    margin-top: 0;
+  }
+
+  .nav-link {
+    color: var(--grey-900);
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    transition: var(--transition);
+    letter-spacing: 2px;
+  }
+  .nav-link:hover {
+    color: var(--primary-500);
+  }
+
+  .active {
+    color: var(--primary-500);
+  }
+
+  @media (max-width: 250px) {
     .nav-center {
-        width: var(--view-width);
-        max-width: var(--max-width);
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem 2rem;
+      flex-direction: column;
     }
-
-    .logo {
-        font-size: clamp(1.5rem, 3vw, 3rem);
-        font-weight: 700;
-        letter-spacing: 2px;
-    }
-
     .nav-links {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-top: 1rem;
+      flex-direction: column;
     }
-
-    .nav-link {
-        color: var(--grey-900);
-        padding: 0.5rem 0.5rem 0.5rem 0;
-        transition: var(--transition);
-        letter-spacing: 2px;
-    }
-    .nav-link:hover {
-        color: var(--primary-500);
-    }
-
-    .active {
-        color: var(--primary-500);
-    }
-
-    @media (min-width: 768px) {
-        .nav-center {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-links {
-            flex-direction: row;
-            margin-top: 0;
-        }
-    }
+  }
 }

@@ -1,19 +1,27 @@
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser } from "../store/actions/authAction";
+import { onLogout } from "../store/actions/authAction";
+import userImage from "../assets/cyclist.jpg";
 
 const Navbar = (props) => {
   return (
     <div className="Navbar">
       <div className="nav-center">
-        <NavLink to="/" className="logo nav-link">
-          <h3>Task Management App</h3>
+        <NavLink to="/" className="nav-link">
+          <div className="user-profile">
+            <div className="user-profile-img ">
+              <img src={userImage} alt="Avatar" />
+            </div>
+            <div className="user-name ">
+              <span>{props.user.name}</span>
+            </div>
+          </div>
         </NavLink>
         <div className="nav-links">
           <span
             className="nav-link"
             style={{ cursor: "pointer" }}
-            onClick={() => props.logoutUser()}
+            onClick={() => props.onLogout()}
           >
             Logout
           </span>
@@ -24,12 +32,14 @@ const Navbar = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const {} = state;
-  return {};
+  const { user } = state.auth;
+  return {
+    user,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  logoutUser: () => dispatch(logoutUser()),
+  onLogout: () => dispatch(onLogout()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

@@ -3,13 +3,8 @@ import { connect } from "react-redux";
 /* components */
 import Navbar from "../components/Navbar";
 
-const PrivateRoutes = ({
-  component: component,
-  auth: { isLoggedIn },
-  ...rest
-}) => {
-  const _isLoggedIn = true;
-  return _isLoggedIn ? (
+const PrivateRoutes = ({ auth: { isLoggedIn } }) => {
+  return isLoggedIn ? (
     <>
       <Navbar />
       <section className="page">

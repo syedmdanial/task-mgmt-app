@@ -1,11 +1,11 @@
-import { Modal, ModalBody, ModalFooter } from 'react-bootstrap';
-import ModalHeader from 'react-bootstrap/ModalHeader';
+import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
+import ModalHeader from "react-bootstrap/ModalHeader";
 
 const WrapperModal = (props) => (
   <Modal
     show={props.show}
     onHide={props.onClose}
-    className={props.styles ? props.styles : ''}
+    className={props.styles ? props.styles : ""}
     centered={props.centered}
     backdrop="static"
   >
