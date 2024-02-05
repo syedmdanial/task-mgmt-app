@@ -35,8 +35,8 @@ const Wrapper = styled.nav`
   }
   .nav-text {
     font-size: 20px;
-    color: $primaryText;
-    font-weight: $semiBoldFontWeight;
+    color: #6d8187;
+    font-weight: 500;
     margin-left: 10px;
     margin-right: 10px;
   }
