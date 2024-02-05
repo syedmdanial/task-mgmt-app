@@ -1,7 +1,10 @@
-.Navbar {
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+import styled from "styled-components";
 
+const Wrapper = styled.nav`
+  .Navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
   .nav-center {
     width: var(--view-width);
     max-width: var(--max-width);
@@ -11,11 +14,9 @@
     justify-content: space-between;
     align-items: center;
   }
-
   .user-profile {
     display: flex;
     align-items: center;
-
     .user-profile-img {
       img {
         width: 70px;
@@ -25,15 +26,13 @@
         cursor: pointer;
         margin-left: 10px;
         margin-right: 10px;
-
-        @include lessThan($screen-sm) {
+        @media (max-width: 767.98px) {
           width: 36px;
           height: 36px;
         }
       }
     }
   }
-
   .nav-text {
     font-size: 20px;
     color: $primaryText;
@@ -41,15 +40,12 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-
   .nav-links {
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
     margin-top: 1rem;
-    flex-direction: row;
-    margin-top: 0;
   }
-
   .nav-link {
     color: var(--grey-900);
     padding: 0.5rem 0.5rem 0.5rem 0;
@@ -59,11 +55,9 @@
   .nav-link:hover {
     color: var(--primary-500);
   }
-
   .active {
     color: var(--primary-500);
   }
-
   @media (max-width: 250px) {
     .nav-center {
       flex-direction: column;
@@ -72,4 +66,6 @@
       flex-direction: column;
     }
   }
-}
+`;
+
+export default Wrapper;
