@@ -7,7 +7,6 @@ import { store, persistor } from "./store/store";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/index.scss";
 
-import App from "./App.jsx";
 import MainRoutes from "./routes/MainRoutes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
