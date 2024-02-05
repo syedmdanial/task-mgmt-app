@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../store/actions/authAction";
@@ -8,10 +8,17 @@ import { toast } from "react-toastify";
 import Loading from "../components/shared/Loading";
 
 const Login = (props) => {
+  const { auth } = props;
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.isLoggedIn) {
+      navigate("/");
+    }
+  }, [auth.isLoggedIn, navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -77,8 +84,8 @@ const Login = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const {} = state;
-  return {};
+  const { auth } = state;
+  return { auth };
 };
 
 const mapDispatchToProps = (dispatch) => ({
