@@ -15,7 +15,7 @@ export const loginUser = (res) => (dispatch) => {
       } else {
         reject();
       }
-    }, 2000);
+    }, 1000);
   });
 };
 

@@ -1,6 +1,6 @@
 $body-bg: #f2f4f4;
 $solidGrey: #d3d3d3;
-$primary: #4cc2f0;
+$primary: #5285ec;
 $secondary: #ffffff;
 $primaryDark: #098dbb;
 $seondaryDark: #1c538d;
@@ -8,9 +8,10 @@ $inActive: #a0a4a8;
 
 /* Text */
 $bodyTextColor: #727e8c;
-$primaryText: #ffffff;
+$primaryText: #6d8187;
 $secondaryText: #000000;
-$headingTextColor: #475f7b;
+$btnTextPrimary: #ffffff;
+$headingTextColor: #537178;
 $invalidText: #dc3545;
 $linkText: #259af5;
 
@@ -23,7 +24,7 @@ $btnBorderRadius: 4px;
 $inputBorderRadius: 4px;
 
 /* Font sizes*/
-$headingFontSize: 1.4em;
+$headingFontSize: 1.2em;
 $subHeadingFontSize: 1em;
 $inputFontSize: 0.9em;
 $btnFontSize: 1em;
@@ -31,3 +32,4 @@ $mdFontSize: 0.9em;
 
 /* Font weights*/
 $boldFontWeight: 700;
+$semiBoldFontWeight: 500;

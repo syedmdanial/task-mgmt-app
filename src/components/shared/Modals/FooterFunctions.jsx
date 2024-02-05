@@ -33,3 +33,14 @@ export const CloseOnlyFooter = (props) => (
     <span>Close</span>
   </button>
 );
+
+export const ActionOnlyFooter = (props) => (
+  <button
+    type="submit"
+    className="btn main-btn w-100"
+    onClick={(e) => props.data.handleActionButton(e)}
+    disabled={props.data.isLoading}
+  >
+    {props.data.isLoading ? <Loading /> : <span>{props.data.actionTitle}</span>}
+  </button>
+);

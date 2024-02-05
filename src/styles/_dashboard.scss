@@ -1,14 +1,15 @@
 .Dashboard {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    .card {
-        width: 15em;
-        min-height: 9em;
-        padding: 2em;
+  .card {
+    width: 15em;
+    min-height: 9em;
+    padding: 2em;
+  }
 
-        span {
-            font-size: $subHeadingFontSize;
-        }
-    }
+  .title {
+    color: $headingTextColor;
+    font-size: $headingFontSize;
+  }
 }

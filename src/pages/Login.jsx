@@ -62,7 +62,7 @@ const Login = (props) => {
             value={name}
           />
         </div>
-        <button type="submit" className="btn btn-block" disabled={loading}>
+        <button type="submit" className="btn main-btn w-100" disabled={loading}>
           {!loading ? "Login" : <Loading />}
         </button>
       </Form>

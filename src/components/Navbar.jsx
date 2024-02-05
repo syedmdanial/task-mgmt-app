@@ -12,20 +12,18 @@ const Navbar = (props) => {
             <div className="user-profile-img ">
               <img src={userImage} alt="Avatar" />
             </div>
-            <div className="user-name ">
+            <div className="nav-text">
               <span>{props.user.name}</span>
             </div>
           </div>
         </NavLink>
-        <div className="nav-links">
-          <span
-            className="nav-link"
-            style={{ cursor: "pointer" }}
-            onClick={() => props.onLogout()}
-          >
-            Logout
-          </span>
-        </div>
+        <span
+          className="nav-text"
+          style={{ cursor: "pointer" }}
+          onClick={() => props.onLogout()}
+        >
+          Logout
+        </span>
       </div>
     </div>
   );

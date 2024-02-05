@@ -1,5 +1,4 @@
-import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
-import ModalHeader from "react-bootstrap/ModalHeader";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "react-bootstrap";
 
 const WrapperModal = (props) => (
   <Modal
