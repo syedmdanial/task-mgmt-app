@@ -38,6 +38,7 @@ const Login = (props) => {
       }
     } else {
       toast.error("ID or Name cannot be empty");
+      setLoading(false);
     }
   };
 
